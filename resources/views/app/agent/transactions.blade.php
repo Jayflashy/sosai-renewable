@@ -1,11 +1,11 @@
-@extends('agent.layouts.master')
+@extends('app.agent.layouts.master2')
 @section('title', "Transaction History")
 
 @section('content')
 <div class="card mt-3">
     {{-- <h4 class="fw-bold card-header">Wallet Deposit History</h4> --}}
     <div class="card-body table-responsive">
-      <table class="w-100 table" id="datatable">
+      <table class="w-100 table" id="dataTable">
         <thead>
           <tr>
             <th>#</th>

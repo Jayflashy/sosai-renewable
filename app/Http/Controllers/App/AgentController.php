@@ -182,7 +182,7 @@ class AgentController extends Controller
                 $trx->save();
                 // send sms and email
 
-                return redirect()->route('agent.transactions')->withSuccess($trx->message ."was successful");
+                return redirect()->route('app.agent.transactions')->withSuccess($trx->message ."was successful");
             }
             else{
                 // refund wallet
@@ -191,7 +191,7 @@ class AgentController extends Controller
                 $trx->status = 3;
                 $trx->response = json_encode($response);
                 $trx->save();
-                return redirect()->route('agent.payment')->withError($trx->message.' was not successful. Please try again');
+                return redirect()->route('app.agent.payment')->withError($trx->message.' was not successful. Please try again');
             }
 
         }
@@ -239,7 +239,7 @@ class AgentController extends Controller
                 $trx->response = ($response);
                 $trx->save();
                 // send sms and email
-                return redirect()->route('agent.transactions')->withSuccess($trx->message ."was successful");
+                return redirect()->route('app.agent.transactions')->withSuccess($trx->message ."was successful");
             }
             else{
                 // refund wallet
@@ -248,7 +248,7 @@ class AgentController extends Controller
                 $trx->status = 3;
                 $trx->response = json_encode($response);
                 $trx->save();
-                return redirect()->route('agent.payment')->withError($trx->message.' was not successful. Please try again');
+                return redirect()->route('app.agent.payment')->withError($trx->message.' was not successful. Please try again');
             }
 
         }
@@ -304,7 +304,7 @@ class AgentController extends Controller
     {
         $deposit = Deposit::whereTrx($ref)->first();
         if($deposit->status == 1){
-            return redirect()->route('agent.wallet')->withError('Transaction already Approved. Please try again');
+            return redirect()->route('app.agent.wallet')->withError('Transaction already Approved. Please try again');
         }
         $deposit->status = 1;
         $deposit->response = $payment;
@@ -313,7 +313,7 @@ class AgentController extends Controller
         $user = $deposit->user;
         $user->balance += $deposit->amount;
         $user->save();
-        return redirect()->route('agent.index')->withSuccess('Payment was successful');
+        return redirect()->route('app.agent.index')->withSuccess('Payment was successful');
     }
     public function deposit_history(){
 

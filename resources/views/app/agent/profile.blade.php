@@ -1,9 +1,9 @@
-@extends('agent.layouts.master')
+@extends('app.agent.layouts.master1')
 @section('title', "Account Setting")
 
 @section('content')
 <div class="row">
-    <div class="col-lg-3">
+    {{-- <div class="col-lg-12">
         <div class="card">
             <div class="card-body text-center border-bottom">
                 <img class="profile-image" src="{{(Auth::user()->image != null) ?my_asset(Auth::user()->image) : static_asset('img/profile.jpg')}}" alt="">
@@ -22,17 +22,6 @@
                     <span class="float-start">Phone</span>
                     <span class="float-end text-muted">{{ Auth::user()->phone ?: 'Not available'}}</span>
                 </p>
-                {{-- <p class="clearfix">
-                    <span class="float-start">Meter Type</span>
-                    <span class="float-end ">
-                        <span class="badge bg-info"> {{ Auth::user()->acc_type ?: 'Not available'}}</span>
-                    </span>
-                </p>
-                <p class="clearfix">
-                    <span class="float-start">Meter Number</span>
-                    <span class="float-end fw-bold">{{ Auth::user()->meter ?: 'Not available'}}</span>
-                </p> --}}
-
                 <p class="clearfix">
                     <span class="float-start">Balance</span>
                     <span class="float-end text-muted">{{ format_price(Auth::user()->balance) }}</span>
@@ -54,8 +43,8 @@
                 </p>
             </div>
         </div>
-    </div>
-    <div class="col-md-9">
+    </div> --}}
+    <div class="col-md-12">
         <div class="card">
             <div class="card-body">
                 <form action="" method="POST" class="row" enctype="multipart/form-data">

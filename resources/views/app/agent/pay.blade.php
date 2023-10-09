@@ -1,11 +1,11 @@
-@extends('agent.layouts.master')
-@section('title', "Package Payment")
+@extends('app.agent.layouts.master1')
+@section('title', "Meter Payments")
 
 @section('content')
 <div class="card">
   <div class="card-header d-sm-flex justify-content-between">
-    <h4>Make Payment to your {{strtoupper(Auth::user()->acc_type)}} Account</h4>
-    <a href="{{route('agent.transactions')}}" class="btn btn-primary">View Transactions</a>
+    <h4>Make Meter Payments</h4>
+    <a href="{{route('app.agent.transactions')}}" class="btn btn-success ">View Transactions</a>
   </div>
   <div class="card-body">
     {{-- Select meter type --}}
@@ -21,7 +21,7 @@
 
     <div id="angazaMeter">
         <h4 class="fw-bold my-2">Payment For ANGAZA Meters</h4>
-        <form action="{{route('agent.payment')}}" method="post" id="angazaForm">
+        <form action="{{route('app.agent.payment')}}" method="post" id="angazaForm">
             @csrf
             <input type="hidden" name="meter_type" value="angaza">
             <div class="form-group">
@@ -59,14 +59,17 @@
                 <label class="form-label fw-bold">Amount</label>
                 <input type="number" max="{{Auth::user()->balance}}" class="form-control" min="0" name="amount" step="any" required placeholder="Amount">
             </div>
+            <div class="col-4">
+                <button type="button" id="validateAngaza" class="btn btn-primary btn-sm w-100 mb-2"><span>Validate</span></button>
+            </div>
             <div class="form-group mb-0">
-                <button class="btn btn-primary btn-block w-100" type="submit">Pay to Account</button>
+                <button id="angazaSubmit" class="btn btn-success btn-block w-100" type="submit">Pay to Account</button>
             </div>
         </form>
     </div>
     <div id="steamaMeter">
         <h4 class="fw-bold my-2">Paying For Steamaco Meters</h4>
-        <form action="{{route('agent.payment')}}" id="steamaForm" method="post">
+        <form action="{{route('app.agent.payment')}}" id="steamaForm" method="post">
             @csrf
             <input type="hidden" name="meter_type" value="steama">
             <div class="form-group">
@@ -88,8 +91,11 @@
                 <label class="form-label fw-bold">Amount</label>
                 <input type="number" max="{{Auth::user()->balance}}" class="form-control" min="0" name="amount" step="any" required placeholder="Amount">
             </div>
+            <div class="form-group col-4">
+                <button type="button" id="validateSteama" class="btn btn-primary w-100 mb-2 btn-sm"><span>Validate </span></button>
+            </div>
             <div class="form-group mb-0">
-                <button class="btn btn-primary btn-block w-100" id="steamBtn" type="submit">Pay to Account</button>
+                <button class="btn btn-success btn-block w-100" id="steamBtn" type="submit">Pay to Account</button>
             </div>
         </form>
     </div>
@@ -165,49 +171,69 @@
   });
 </script>
 <script>
-    $("#steamaMeterID").keyup(function(){
-        var meter = $(this).val();
+    $("#validateSteama").click(function(){
+        var meter = $("#steamaMeterID").val();
         if(meter.length >= 6) {
             // get customer details from api
             $.ajax({
             type:'GET',
-            url:"{{route('agent.verify.steama')}}",
+            url:"{{route('app.agent.verify.steama')}}",
             dataType: 'json',
             data:{meter},
             beforeSend: function(){
-                $("#steamaCustomerName").val("Loading Customer Name");
-                $("#steamaCustomerBal").val("Loading Details");
+                // show loader
+                $.LoadingOverlay("show",{
+                    image: "{{my_asset(get_setting('favicon'))}}"
+                });
             },
             success: function(result){
                 console.log(result)
+                $.LoadingOverlay("hide");
                 if(result.status == 'success'){
+                    // remove validate button
                     $("#steamaCustomerName").val(result.name);
                     $("#steamaCustomerBal").val(result.balance);
                     $("#steamaCustomer").val(result.customer);
+
+                    $("#steamBtn").css('display','block');
                 } else{
-                    $("#steamaCustomerName").val("Unable to veriy Meter");
-                    $("#steamaCustomerBal").val("Loading Details");
+                    Snackbar.show({
+                        backgroundColor: '#e3342f',
+                        pos: 'top-right',
+                        text: result.message,
+                    });
                 }
             },
         });
         }
+        else{
+            Snackbar.show({
+                backgroundColor: '#e3342f',
+                pos: 'top-right',
+                text: 'Please checkt meter number',
+            });
+        }
     });
-    $("#angazaMeterID").keyup(function(){
-        var meter = $(this).val();
+    $("#validateAngaza").click(function(){
+        var meter = $("#angazaMeterID").val();
         if(meter.length >= 6) {
             // get customer details from api
             $.ajax({
             type:'GET',
-            url:"{{route('agent.verify.angaza')}}",
+            url:"{{route('app.agent.verify.angaza')}}",
             dataType: 'json',
             data:{meter},
             beforeSend: function(){
-                $("#angazaCustomerName").val("Loading Customer Name");
-                $("#angazaCustomerPhone").val("Loading Details");
+                $.LoadingOverlay("show",{
+                    image: "{{my_asset(get_setting('favicon'))}}"
+                });
+
             },
             success: function(result){
+                $.LoadingOverlay("hide");
                 console.log(result)
                 if(result.status == 'success'){
+                    // remove validate button
                     $("#angazaCustomerName").val(result.name);
                     $("#angazaCustomerPhone").val(result.phone);
                     $("#angazaCustomer").val(result.customer);
@@ -215,12 +241,25 @@
                     $("#angazaCustomerPaid").val(result.paid);
                     $("#angazaCustomerTopay").val(result.to_pay);
                     $("#angazaCustomerDue").val(result.due_date);
+
+                    $("#angazaSubmit").css('display','block');
                 } else{
-                    $("#steamaCustomerName").val("Unable to veriy Meter");
-                    $("#steamaCustomerBal").val("Loading Details");
+                    Snackbar.show({
+                        backgroundColor: '#e3342f',
+                        pos: 'top-right',
+                        text: result.message,
+                    });
+                    swal("Error!", result.message, "warning");
                 }
             },
         });
+        }
+        else{
+            Snackbar.show({
+                backgroundColor: '#e3342f',
+                pos: 'top-right',
+                text: 'Please input meter number',
+            });
         }
     });
 </script>

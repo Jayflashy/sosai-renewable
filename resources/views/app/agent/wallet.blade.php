@@ -1,4 +1,4 @@
-@extends('agent.layouts.master')
+@extends('app.agent.layouts.master1')
 @section('title', "Fund Wallet")
 
 @section('content')
