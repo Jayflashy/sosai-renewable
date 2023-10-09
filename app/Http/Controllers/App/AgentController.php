@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PaymentController;
 use App\Models\Deposit;
 use App\Models\Transaction;
 use App\Models\User;
@@ -19,10 +20,10 @@ class AgentController extends Controller
     //
     function index(){
         $transactions = Transaction::whereUserId(Auth::user()->id)->orderByDesc('updated_at')->limit(10)->get();
-        return view('agent.index', compact('transactions'));
+        return view('app.agent.index', compact('transactions'));
     }
     public function profile(){
-        return view('agent.profile');
+        return view('app.agent.profile');
     }
     function update_password(Request $request){
         $request->validate([
@@ -75,7 +76,7 @@ class AgentController extends Controller
         return redirect()->back()->withSuccess('Profile updated successfully');
     }
     function package_payment(){
-        return view('agent.pay');
+        return view('app.agent.pay');
     }
     // meter verificaion
     function verify_steamaco(Request $request){
@@ -261,12 +262,12 @@ class AgentController extends Controller
     // transactions
     public function transactions(){
         $transactions = Transaction::whereUserId(Auth::user()->id)->orderByDesc('updated_at')->get();
-        return view('agent.transactions', \compact('transactions'));
+        return view('app.agent.transactions', \compact('transactions'));
     }
     public function wallet(){
 
         $deposits = Deposit::whereUserId(Auth::user()->id)->orderByDesc('id')->get();
-        return view('agent.wallet', \compact('deposits'));
+        return view('app.agent.wallet', \compact('deposits'));
     }
     public function fund_wallet(Request $request)
     {
@@ -317,7 +318,7 @@ class AgentController extends Controller
     public function deposit_history(){
 
         $deposits = Deposit::whereUserId(Auth::user()->id)->orderByDesc('id')->get();
-        return view('agent.deposits', \compact('deposits'));
+        return view('app.agent.deposits', \compact('deposits'));
     }
     function bank(){
         // return "helpp";

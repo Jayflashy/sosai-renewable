@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PaymentController;
 use App\Models\Deposit;
 use App\Models\Transaction;
 use App\Models\User;

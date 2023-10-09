@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\AgentController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\App\AgentController;
+use App\Http\Controllers\App\HomeController;
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\App\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +26,7 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('/logout', 'logout')->name('logout');
     Route::post('/register', 'register')->name('register');
 });
-Route::prefix('app')->group(function(){
+Route::prefix('app')->as('app.')->group(function(){
 
     Route::middleware('user')->prefix('user')->as('user.')->controller(UserController::class)->group(function(){
         Route::get('/', 'index')->name('index');
