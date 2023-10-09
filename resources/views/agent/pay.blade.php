@@ -14,7 +14,8 @@
         <select name="type" data-placeholder="Select Meter Type"  id="MeterSelector" class="form-select" required>
             <option value="select">Select Meter Type</option>
             <option value="angaza">Angaza Meter</option>
-            <option value="steama">Seamaco Meter</option>
+            <option value="steama">Steamaco Meter</option>
+            {{-- <option value="paygee">Paygee Account</option> --}}
         </select>
     </div>
 
@@ -92,6 +93,9 @@
             </div>
         </form>
     </div>
+    <div id="paygeeMeter">
+
+    </div>
 
   </div>
 </div>
@@ -128,6 +132,9 @@
     #steamaName{
         display:none;
     }
+    #paygeeMeter{
+        display:none;
+    }
   .card-header{border-top:1px solid #1d1f1d }
 </style>
 @endsection
@@ -138,12 +145,19 @@
     if(verify_name == 'angaza'){
       $("#steamaMeter").css("display", "none");
       $("#angazaMeter").css("display", "block");
+      $("#paygeeMeter").css("display", "none");
     }else if(verify_name == 'steama'){
       $("#angazaMeter").css("display", "none");
       $("#steamaMeter").css("display", "block");
+      $("#paygeeMeter").css("display", "none");
+    }else if(verify_name == 'paygee'){
+      $("#angazaMeter").css("display", "none");
+      $("#steamaMeter").css("display", "none");
+      $("#paygeeMeter").css("display", "block");
     }else{
       $("#angazaMeter").css("display", "none");
       $("#steamaMeter").css("display", "none");
+      $("#paygeeMeter").css("display", "none");
     }
   });
   $("input[intype='number']").on('input', function(e) {

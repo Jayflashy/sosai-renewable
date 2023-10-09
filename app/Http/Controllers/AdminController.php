@@ -167,7 +167,7 @@ class AdminController extends Controller
     }
     function angaza_customers(){
         $steamaco = new AngazaApi();
-        $customers = $steamaco->allClients()['_embedded'];
+        return$customers = $steamaco->allClients()['_embedded'];
         return view('admin.angaza.customers',compact('customers'));
     }
 

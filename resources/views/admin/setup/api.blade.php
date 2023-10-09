@@ -11,7 +11,7 @@
                 <p>Manage system Ads.</p>
             </div>
         </div><!-- .nk-block-head-content -->
-        
+
     </div><!-- .nk-block-between -->
 </div><!-- .nk-block-head -->
 @endsection
@@ -59,6 +59,32 @@
                         <input type="hidden" name="types[]" value="ANGAZA_PASSWORD">
                         <label class="form-label">{{__('ANGAZA PASSWORD')}}</label>
                         <input type="password" class="form-control" name="ANGAZA_PASSWORD" value="{{  env('ANGAZA_PASSWORD') }}" placeholder="Angaza Password" required>
+                    </div>
+                    <div class="form-group mb-0">
+                        <button type="submit" class="btn w-100 btn-primary">{{__('Save')}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0 fw-bold ">Paygee Credentials</h5>
+            </div>
+            <div class="card-body">
+                <form class="form-horizontal" action="{{ route('admin.settings.env_key') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <input type="hidden" name="types[]" value="PAYGEE_API">
+                        <label class="form-label">{{__('PAYGEE API KEY')}}</label>
+                        <input type="text" class="form-control" name="PAYGEE_API" value="{{  env('PAYGEE_API') }}" placeholder="Paygee API Key" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="types[]" value="PAYGEE_BUSINESS">
+                        <label class="form-label">{{__('PAYGEE BUSINESS REFERENCE')}}</label>
+                        <input type="text" class="form-control" name="PAYGEE_BUSINESS" value="{{  env('PAYGEE_BUSINESS') }}" placeholder="Paygee Business Reference" required>
                     </div>
                     <div class="form-group mb-0">
                         <button type="submit" class="btn w-100 btn-primary">{{__('Save')}}</button>
