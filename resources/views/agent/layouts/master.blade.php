@@ -68,6 +68,8 @@
     <script src="{{static_asset('js/core.js')}}"></script>
     <script src="{{static_asset('js/app.js')}}"></script>
 
+    <script src="{{static_asset('app/js/loadingoverlay.min.js')}}"></script>
+    <script src="{{static_asset('app/js/sweetalert.min.js')}}"></script>
     <script src="{{static_asset('js/snackbar.min.js')}}"></script>
     @yield('scripts')
     <script>

@@ -10,15 +10,15 @@ class AngazaApi
     protected $username ;
     protected $password;
     protected $baseurl ;
-    
+
     public function __construct()
     {
         $this->username = env('ANGAZA_USERNAME');
         $this->password = env('ANGAZA_PASSWORD');
         $this->baseurl = "https://payg.angazadesign.com/data";
-        $this->baseurl1 ="https://stoplight.io/mocks/angaza/dev-portal-connects/67771774";
+        // $this->baseurl1 ="https://stoplight.io/mocks/angaza/dev-portal-connects/67771774";
     }
-    
+
     public function generateReference()
     {
         return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
@@ -47,7 +47,7 @@ class AngazaApi
         ])->post($this->baseurl.'/get-token/', $data);
 
         return 'Token ' . $response['token'];
-    } 
+    }
 
     public function getAccountDetails($id)
     {
@@ -84,6 +84,14 @@ class AngazaApi
         // return $ref;
         $response = Http::withBasicAuth($this->username, $this->password)
         ->put($this->baseurl.'/payments/'.$ref, $data)->json();
+        return $response;
+    }
+
+    public function payment_token($link)
+    {
+        // $url = ;
+        // return $ref;
+        $response = Http::withBasicAuth($this->username, $this->password)->get($link)->json();
         return $response;
     }
 }

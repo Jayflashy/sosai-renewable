@@ -86,6 +86,8 @@ class AgentController extends Controller
         return back()->withSuccess('User Profile Updated Successfully');
     }
     function package_payment(){
+        $mesg = "Thank you! We have received your payment of ".format_number(1000)." for account 1234567890 . Keycode: .";
+        return send_sms("2348035852702",$mesg);
         return view('app.agent.pay');
     }
     // meter verificaion
@@ -211,9 +213,9 @@ class AgentController extends Controller
                 'meter' => 'required|numeric',
                 'phone' => 'required|string',
                 'name' => 'required|string',
-                'amount' => 'required|numeric|min:500',
+                'amount' => 'required|numeric|min:50',
             ]);
-            $steama = new AngazaAPi();
+            $steama = new AngazaApi();
             $ref = \getTrxcode(16);
             $date = Date('F d, Y h:ia');
             // check user balance
@@ -243,12 +245,18 @@ class AgentController extends Controller
                 'account_qid' => $customer['qid'],
             ];
             $response = $steama->userPayment($data, $uuid);
+
             if( isset($response['qid']) && isset($response['account_qid']) )
             {
+                $actUrl =  $response['_links']['za:activation']['href'];
+                $token =  angaza_token_from_link($actUrl);
                 $trx->status = 1;
                 $trx->response = ($response);
+                $trx->token = $token ?? "";
                 $trx->save();
                 // send sms and email
+                $mesg = "Thank you! We have received your payment of ".format_number($request->amount)." for account {$request->meter}. . Keycode: {$token}.";
+                send_sms($response['msisdn'],$mesg);
                 return redirect()->route('app.agent.transactions')->withSuccess($trx->message ."was successful");
             }
             else{
