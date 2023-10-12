@@ -23,6 +23,14 @@
     <div class="col-sm-6 col-lg-3">
         <div class="card text-center">
             <div class="card-body p-t-10">
+                <h4 class="card-title text-muted mb-0">Angaza Balance</h4>
+                <h2 class="mt-3 mb-2"><b>{{format_price(Auth::user()->balance)}}</b></h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="card text-center">
+            <div class="card-body p-t-10">
                 <h4 class="card-title text-muted mb-0">Angaza Transactions</h4>
                 <h2 class="mt-3 mb-2"><b>{{ format_price(Auth::user()->transactions->where('type','angaza')->where('status','1')->sum('amount'))}}</b></h2>
             </div>

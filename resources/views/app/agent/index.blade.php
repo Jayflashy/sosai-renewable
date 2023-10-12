@@ -14,6 +14,14 @@
     <div class="col-sm-6">
         <div class="card text-center">
             <div class="card-body p-t-10">
+                <h4 class="card-title text-muted mb-0">Angaza Balance</h4>
+                <h5 class="mt-3 mb-2"><b>{{format_price(Auth::user()->balance)}}</b></h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card text-center">
+            <div class="card-body p-t-10">
                 <h4 class="card-title text-muted mb-0">Wallet Balance</h4>
                 <h5 class="mt-3 mb-2"><b>{{format_price(Auth::user()->balance)}}</b></h5>
             </div>

@@ -46,6 +46,7 @@ Route::middleware('agent')->prefix('agent')->as('agent.')->controller(AgentContr
     Route::get('/dashboard', 'index')->name('dashboard');
     Route::get('/profile', 'profile')->name('profile');
     Route::post('/profile', 'update_profile')->name('profile');
+    Route::post('/angaza/profile', 'update_angaza')->name('angaza.profile');
     Route::post('/password/update', 'update_password')->name('password.update');
     Route::get('/deposit-history', 'deposit_history')->name('deposits');
     Route::get('/payment', 'package_payment')->name('payment');

@@ -110,6 +110,30 @@
                 </form>
             </div>
         </div>
+        {{-- Angaza Details --}}
+        <div class="card user-data-card mt-3">
+            <h5 class="card-header">Angaza Credentials</h5>
+            <div class="card-body">
+                <form action="{{route('app.agent.angaza.profile')}}" method="post">
+                    @csrf
+                    <div class="form-group mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control" value="{{Auth::user()->angaza_username}}" name="angaza_username" placeholder="Angaza Username" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Password</label>
+                        <input class="form-control" id="psw-input1" value="{{Auth::user()->angaza_password}}" required name="angaza_password" type="text" placeholder="Enter Password">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Customer ID</label>
+                        <input type="text" class="form-control" value="{{Auth::user()->angaza_user}}" name="angaza_user" placeholder="Account Id">
+                    </div>
+                    <div class="form-group mb-0">
+                        <button type="submit" class="btn btn-success w-100">Update Account</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

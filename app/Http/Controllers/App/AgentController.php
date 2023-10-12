@@ -75,6 +75,16 @@ class AgentController extends Controller
         $user->save();
         return redirect()->back()->withSuccess('Profile updated successfully');
     }
+    function update_angaza(Request $request){
+        $user  = Auth::user();
+        $user->angaza_username = $request->angaza_username;
+        $user->angaza_password = $request->angaza_password;
+        $user->angaza_user     = $request->angaza_user;
+
+        $user->save();
+
+        return back()->withSuccess('User Profile Updated Successfully');
+    }
     function package_payment(){
         return view('app.agent.pay');
     }

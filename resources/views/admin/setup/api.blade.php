@@ -71,20 +71,15 @@
     <div class="col-sm-6 col-md-6">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0 fw-bold ">Paygee Credentials</h5>
+                <h5 class="mb-0 fw-bold ">SMS Payment Gateway</h5>
             </div>
             <div class="card-body">
                 <form class="form-horizontal" action="{{ route('admin.settings.env_key') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <input type="hidden" name="types[]" value="PAYGEE_API">
-                        <label class="form-label">{{__('PAYGEE API KEY')}}</label>
-                        <input type="text" class="form-control" name="PAYGEE_API" value="{{  env('PAYGEE_API') }}" placeholder="Paygee API Key" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="hidden" name="types[]" value="PAYGEE_BUSINESS">
-                        <label class="form-label">{{__('PAYGEE BUSINESS REFERENCE')}}</label>
-                        <input type="text" class="form-control" name="PAYGEE_BUSINESS" value="{{  env('PAYGEE_BUSINESS') }}" placeholder="Paygee Business Reference" required>
+                        <input type="hidden" name="types[]" value="BULKSMS_KEY">
+                        <label class="form-label">{{__('BULKSMS API KEY')}}</label>
+                        <input type="text" class="form-control" name="BULKSMS_KEY" value="{{  env('BULKSMS_KEY') }}" placeholder="Bulksms API Key" required>
                     </div>
                     <div class="form-group mb-0">
                         <button type="submit" class="btn w-100 btn-primary">{{__('Save')}}</button>
