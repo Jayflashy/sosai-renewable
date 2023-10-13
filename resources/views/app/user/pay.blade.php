@@ -1,15 +1,15 @@
-@extends('user.layouts.master')
+@extends('app.user.layouts.master1')
 @section('title', "Package Payment")
 
 @section('content')
 <div class="card">
   <div class="card-header d-sm-flex justify-content-between">
     <h4>Make Payment to your {{strtoupper(Auth::user()->acc_type)}} Account</h4>
-    <a href="{{route('user.transactions')}}" class="btn btn-primary">View Transactions</a>
+    <a href="{{route('app.user.transactions')}}" class="btn btn-primary">View Transactions</a>
   </div>
   <div class="card-body">
     @if(Auth::user()->acc_type == 'steama')
-    <form action="{{route('user.payment')}}" id="steamaForm" method="post">
+    <form action="{{route('app.user.payment')}}" id="steamaForm" method="post">
       @csrf
       <input type="hidden" name="meter_type" value="steama">
       <div class="form-group">
@@ -36,7 +36,7 @@
       </div>
     </form>
     @elseif (Auth::user()->acc_type == "angaza")
-    <form action="{{route('user.payment')}}" method="post" id="angazaForm">
+    <form action="{{route('app.user.payment')}}" method="post" id="angazaForm">
       @csrf
       <input type="hidden" name="meter_type" value="angaza">
       <div class="form-group">

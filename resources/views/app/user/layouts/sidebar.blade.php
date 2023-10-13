@@ -1,60 +1,40 @@
-<div class="vertical-menu">
-
-    <div data-simplebar class="h-100">
-
-        <!--- Sidemenu -->
-        <div id="sidebar-menu">
-            <!-- Left Menu Start -->
-            <ul class="metismenu list-unstyled" id="side-menu">
-                <li class="menu-title">Menu</li>
-
-                <li>
-                    <a href="{{route('user.index')}}" class="waves-effect">
-                        <i class="ri-dashboard-line"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('user.profile')}}" class=" waves-effect">
-                        <i class="fa fa-user-cog"></i>
-                        <span>Account Setting</span>
-                    </a>
-                </li>
-                <li class="menu-title">Payment</li>
-                <li>
-                    <a href="{{route('user.wallet')}}" class=" waves-effect">
-                        <i class="fa fa-money-bill"></i>
-                        <span>Deposit Money</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('user.payment')}}" class=" waves-effect">
-                        <i class="fas fa-wallet"></i>
-                        <span>Make Payment</span>
-                    </a>
-                </li>
-
-                <li class="menu-title">transactions</li>
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-file-text-line"></i>
-                        <span>Reports</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="true">
-                        <li><a href="{{route('user.deposits')}}">Deposit History</a></li>
-                        <li><a href="{{route('user.transactions')}}">Transaction History</a></li>
-                    </ul>
-                </li>
-                <li class="menu-title">Account</li>
-                <li>
-                    <a href="{{route('logout')}}" class=" waves-effect">
-                        <i class="fa fa-sign-out-alt"></i>
-                        <span>Logout</span>
-                    </a>
-                </li>
-            </ul>
+<div class="offcanvas offcanvas-start" id="affanOffcanvas" data-bs-scroll="true" tabindex="-1" aria-labelledby="affanOffcanvsLabel">
+    <button class="btn-close btn-close-white text-reset" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <div class="offcanvas-body p-0">
+      <!-- Side Nav Wrapper -->
+      <div class="sidenav-wrapper">
+        <!-- Sidenav Profile -->
+        <div class="sidenav-profile bg-success">
+          <div class="sidenav-style1"></div>
+          <!-- User Info -->
+          <div class="user-info">
+            <h4 class="user-name mb-0">{{Auth::user()->name}}</h4>
+            <span>Balance: {{format_price(Auth::user()->balance)}}</span> <br>
+          </div>
         </div>
-        <!-- Sidebar -->
+        <!-- Sidenav Nav -->
+        <ul class="sidenav-nav ps-0">
+          <li><a href="{{route('app.user.dashboard')}}"><i class="bi bi-house-door"></i>Dashboard</a></li>
+          <li><a href="{{route('app.user.payment')}}"><i class="fa fa-wallet"></i>Meter Payment</a></li>
+          <li><a href="{{route('app.user.wallet')}}"><i class="bi bi-bank"></i>Fund Account</a></li>
+          <li><a href="#"><i class="fa fa-money-bill"></i>Reports</a>
+            <ul>
+              <li><a href="{{route('app.user.deposits')}}">Deposit History</a></li>
+
+              <li><a href="{{route('app.user.transactions')}}">Transaction History</a></li>
+            </ul>
+          </li>
+          <li>
+            <div class="night-mode-nav">
+              <i class="bi bi-moon"></i>Night Mode
+              <label class="jdv-switch2 jdv-switch-success ms-auto">
+                <input type="checkbox" id="darkSwitch">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </li>
+          <li><a href="{{route('logout')}}"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+        </ul>
+      </div>
     </div>
 </div>
-<!-- Left Sidebar End -->

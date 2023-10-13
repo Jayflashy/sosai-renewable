@@ -1,9 +1,9 @@
-@extends('user.layouts.master')
+@extends('app.user.layouts.master')
 @section('title', "Dashboard")
 
 @section('content')
 <div class="row">
-    <div class="col-sm-6 col-lg-3">
+    <div class="col-sm-6">
         <div class="card text-center">
             <div class="card-body">
                 <h4 class="card-title text-muted">Meter Number</h4>
@@ -12,7 +12,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-6 col-lg-3">
+    <div class="col-sm-6 ">
         <div class="card text-center">
             <div class="card-body p-t-10">
                 <h4 class="card-title text-muted mb-0">Wallet Balance</h4>
@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-6 col-lg-3">
+    <div class="col-sm-6">
         <div class="card text-center">
             <div class="card-body p-t-10">
                 <h4 class="card-title text-muted mb-0">Account Type</h4>
@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-6 col-lg-3">
+    <div class="col-sm-6">
         <div class="card text-center">
             <div class="card-body p-t-10">
                 <h4 class="card-title text-muted mb-0">Total Transactions</h4>
@@ -145,11 +145,11 @@
             <th>#</th>
             <th>Amount</th>
             <th>Status</th>
-            <th>Trx Code</th>
-            <th>Name</th>
-            <th>Meter</th>
-            <th>Date</th>
             <th>Details</th>
+            {{-- <th>Name</th>
+            <th>Meter</th> --}}
+            <th>Date</th>
+            <th>Token</th>
           </tr>
         </thead>
         <tbody>
@@ -166,11 +166,16 @@
                     <span class="badge bg-danger">failed</span>
                 @endif
               </td>
-              <td>{{$item->code}}</td>
-              <td>{{$item->name}}</td>
-              <td>{{$item->meter}}</td>
+              <td>
+                <p class="my-0">Code: {{$item->code}}</p>
+                <p class="my-0">Name: {{$item->name}} </p>
+                <p class="badge bg-info my-0"> {{$item->type}} </p>
+                <p class="my-0">Meter: {{$item->meter}}</p>
+              </td>
+              {{-- <td>{{$item->name}}</td>
+              <td>{{$item->meter}}</td> --}}
               <td>{{show_datetime($item->updated_at)}}</td>
-              <td>{{$item->message}}</td>
+              <td>{{$item->token}}</td>
             </tr>
           @endforeach
         </tbody>

@@ -1,9 +1,9 @@
-@extends('user.layouts.master')
+@extends('app.user.layouts.master1')
 @section('title', "Account Setting")
 
 @section('content')
 <div class="row">
-    <div class="col-lg-3">
+    {{-- <div class="col-lg-3">
         <div class="card">
             <div class="card-body text-center border-bottom">
                 <img class="profile-image" src="{{(Auth::user()->image != null) ?my_asset(Auth::user()->image) : static_asset('img/profile.jpg')}}" alt="">
@@ -54,8 +54,8 @@
                 </p>
             </div>
         </div>
-    </div>
-    <div class="col-md-9">
+    </div> --}}
+    <div class="col-md-12">
         <div class="card">
             <div class="card-body">
                 <form action="" method="POST" class="row" enctype="multipart/form-data">
@@ -103,7 +103,7 @@
         <div class="card user-data-card mt-3">
             <h5 class="card-header">Change Password</h5>
             <div class="card-body">
-                <form action="{{route('user.password.update')}}" method="post">
+                <form action="{{route('app.user.password.update')}}" method="post">
                     @csrf
                     <div class="form-group mb-3">
                         <label class="form-label">Old Password</label>

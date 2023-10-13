@@ -20,10 +20,10 @@ class UserController extends Controller
     //
     function index(){
         $transactions = Transaction::whereUserId(Auth::user()->id)->orderByDesc('updated_at')->limit(10)->get();
-        return view('user.index', compact('transactions'));
+        return view('app.user.index', compact('transactions'));
     }
     public function profile(){
-        return view('user.profile');
+        return view('app.user.profile');
     }
     function update_password(Request $request){
         $request->validate([
@@ -88,7 +88,7 @@ class UserController extends Controller
             try{
                 $meter = $steama->getMeterDetails(Auth::user()->meter);
                 $customer = $steama->getCustomerDetails($meter['customer']);
-                return view('user.pay',compact('meter','customer'));
+                return view('app.user.pay',compact('meter','customer'));
             }catch(\Exception $e){
                 return back()->withError('Meter Number Not Found. Please Try Again');
             }
@@ -98,13 +98,13 @@ class UserController extends Controller
                 $meter = $angaza->getAccountDetails(Auth::user()->meter);
                 $customer = $angaza->getClientDetails($meter['client_qids'][0]);
                 // return $customer;
-                return view('user.pay',compact('meter','customer'));
+                return view('app.user.pay',compact('meter','customer'));
             } catch(\Exception $e){
                 return back()->withError('Meter Number Not Found. Please Try Again');
             }
 
         }
-        return view('user.pay');
+        return view('app.user.pay');
     }
     function make_payment(Request $request)
     {
@@ -160,7 +160,7 @@ class UserController extends Controller
                 $trx->save();
                 // send sms and email
 
-                return redirect()->route('user.transactions')->withSuccess($trx->message ."was successful");
+                return redirect()->route('app.user.transactions')->withSuccess($trx->message ."was successful");
             }
             else{
                 // refund wallet
@@ -169,7 +169,7 @@ class UserController extends Controller
                 $trx->status = 3;
                 $trx->response = json_encode($response);
                 $trx->save();
-                return redirect()->route('user.payment')->withError($trx->message.' was not successful. Please try again');
+                return redirect()->route('app.user.payment')->withError($trx->message.' was not successful. Please try again');
             }
 
         }
@@ -222,7 +222,7 @@ class UserController extends Controller
                 $token =  angaza_token_from_link($actUrl);
                 $mesg = "Thank you! We have received your payment of ".format_number($request->amount)." for Meter {$request->meter}. . Keycode: {$token}.";
                 send_sms($response['msisdn'],$mesg);
-                return redirect()->route('user.transactions')->withSuccess($trx->message ."was successful");
+                return redirect()->route('app.user.transactions')->withSuccess($trx->message ."was successful");
             }
             else{
                 // refund wallet
@@ -231,7 +231,7 @@ class UserController extends Controller
                 $trx->status = 3;
                 $trx->response = json_encode($response);
                 $trx->save();
-                return redirect()->route('user.payment')->withError($trx->message.' was not successful. Please try again');
+                return redirect()->route('app.user.payment')->withError($trx->message.' was not successful. Please try again');
             }
 
         }
@@ -245,12 +245,12 @@ class UserController extends Controller
     // transactions
     public function transactions(){
         $transactions = Transaction::whereUserId(Auth::user()->id)->orderByDesc('updated_at')->get();
-        return view('user.transactions', \compact('transactions'));
+        return view('app.user.transactions', \compact('transactions'));
     }
     public function wallet(){
 
         $deposits = Deposit::whereUserId(Auth::user()->id)->orderByDesc('id')->get();
-        return view('user.wallet', \compact('deposits'));
+        return view('app.user.wallet', \compact('deposits'));
     }
     public function fund_wallet(Request $request)
     {
@@ -287,7 +287,7 @@ class UserController extends Controller
     {
         $deposit = Deposit::whereTrx($ref)->first();
         if($deposit->status == 1){
-            return redirect()->route('user.wallet')->withError('Transaction already Approved. Please try again');
+            return redirect()->route('app.user.wallet')->withError('Transaction already Approved. Please try again');
         }
         $deposit->status = 1;
         $deposit->response = $payment;
@@ -296,12 +296,12 @@ class UserController extends Controller
         $user = $deposit->user;
         $user->balance += $deposit->amount;
         $user->save();
-        return redirect()->route('user.index')->withSuccess('Payment was successful');
+        return redirect()->route('app.user.index')->withSuccess('Payment was successful');
     }
     public function deposit_history(){
 
         $deposits = Deposit::whereUserId(Auth::user()->id)->orderByDesc('id')->get();
-        return view('user.deposits', \compact('deposits'));
+        return view('app.user.deposits', \compact('deposits'));
     }
     function bank(){
         // return "helpp";

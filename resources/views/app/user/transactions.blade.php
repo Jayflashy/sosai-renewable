@@ -1,11 +1,11 @@
-@extends('user.layouts.master')
+@extends('app.user.layouts.master2')
 @section('title', "Transaction History")
 
 @section('content')
 <div class="card mt-3">
     {{-- <h4 class="fw-bold card-header">Wallet Deposit History</h4> --}}
     <div class="card-body table-responsive">
-      <table class="w-100 table" id="datatable">
+      <table class="w-100 table" id="dataTable">
         <thead>
           <tr>
             <th>#</th>
@@ -15,7 +15,7 @@
             <th>Name</th>
             <th>Meter</th>
             <th>Date</th>
-            <th>Details</th>
+            <th>Keycode</th>
           </tr>
         </thead>
         <tbody>
@@ -30,13 +30,13 @@
                     <span class="badge bg-warning">pending</span>
                 @elseif ($item->status == 3)
                     <span class="badge bg-danger">failed</span>
-                @endif        
+                @endif
               </td>
               <td>{{$item->code}}</td>
               <td>{{$item->name}}</td>
               <td>{{$item->meter}}</td>
               <td>{{show_datetime($item->updated_at)}}</td>
-              <td>{{$item->message}}</td>
+              <td>{{$item->token}}</td>
             </tr>
           @endforeach
         </tbody>

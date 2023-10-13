@@ -64,7 +64,7 @@
     </div>
 
     <!-- Header Area -->
-    @include('app.user.layouts.header')
+    @include('app.user.layouts.header1')
     <!-- # Sidenav Left -->
     @include('app.user.layouts.sidebar')
 

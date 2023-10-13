@@ -1,4 +1,4 @@
-@extends('user.layouts.master')
+@extends('app.user.layouts.master1')
 @section('title', "Fund Wallet")
 
 @section('content')
@@ -32,7 +32,7 @@
                     <h6>Acc Name: Jay flashy</h6>
                     <p class="acc-num">Acc Number: <span onclick="copyDivContent('1234323431')">33215678765 <i class="ms-2 far fa-copy"></i></span> </p>
                 </div>
-            </div>  
+            </div>
         </div>
     </div>
 </div> --}}
@@ -95,5 +95,5 @@
     .acc-num >span >i{
     cursor: pointer;
     }
-</style>    
+</style>
 @endsection

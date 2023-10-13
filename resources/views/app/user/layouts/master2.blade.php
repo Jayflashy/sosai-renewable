@@ -64,7 +64,7 @@
     </div>
 
     <!-- Header Area -->
-    @include('app.user.layouts.header')
+    @include('app.user.layouts.header1')
     <!-- # Sidenav Left -->
     @include('app.user.layouts.sidebar')
 
@@ -79,12 +79,11 @@
     @include('app.user.layouts.footer')
 
     <!-- All JavaScript Files -->
-    <script src="{{static_asset('app/js/vendors1.js')}}"></script>
-    {{-- <script src="{{static_asset('js/jquery.min.js')}}"></script> --}}
-    <script src="{{static_asset('app/js/bootstrap.bundle.min.js')}}"></script>
+
+    <script src="{{static_asset('app/js/vendors.js')}}"></script>
+    <script src="{{static_asset('app/js/jquery.min.js')}}"></script>
     <script src="{{static_asset('app/js/active.js')}}"></script>
-    <!-- PWA -->
-    <!-- <script src="asset/js/pwa.js"></script> -->
+
     <script src="{{static_asset('app/js/loadingoverlay.min.js')}}"></script>
     <script src="{{static_asset('app/js/snackbar.min.js')}}"></script>
     <script src="{{static_asset('app/js/sweetalert.min.js')}}"></script>
