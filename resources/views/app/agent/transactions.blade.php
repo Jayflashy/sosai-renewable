@@ -7,41 +7,46 @@
     <div class="card-body table-responsive">
       <table class="w-100 table" id="dataTable">
         <thead>
-          <tr>
-            <th>#</th>
-            <th>Amount</th>
-            <th>Status</th>
-            <th>Trx Code</th>
-            <th>Name</th>
-            <th>Meter Type</th>
-            <th>Number</th>
-            <th>Date</th>
-            <th>Details</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($transactions as $key=> $item)
             <tr>
-              <td>{{$key +1 }}</td>
-              <td>{{format_price($item->amount) }}</td>
-              <td>
-                @if($item->status == 1)
-                    <span class="badge bg-success">successful</span>
-                @elseif ($item->status == 2)
-                    <span class="badge bg-warning">pending</span>
-                @elseif ($item->status == 3)
-                    <span class="badge bg-danger">failed</span>
-                @endif
-              </td>
-              <td>{{$item->code}}</td>
-              <td>{{$item->name}}</td>
-              <td><span class="badge bg-info"> {{$item->type}} </span></td>
-              <td>{{$item->meter}}</td>
-              <td>{{show_datetime($item->updated_at)}}</td>
-              <td>{{$item->message}}</td>
+              <th>#</th>
+              <th>Amount</th>
+              <th>Status</th>
+              {{-- <th>Trx Code</th> --}}
+              <th>Details</th>
+              {{-- <th>Name</th>
+              <th>Meter Type</th>
+              <th>Number</th> --}}
+              <th>Date</th>
+              <th>Token</th>
             </tr>
-          @endforeach
-        </tbody>
+          </thead>
+          <tbody>
+            @foreach ($transactions as $key=> $item)
+              <tr>
+                <td>{{$key +1 }}</td>
+                <td>{{format_price($item->amount) }}</td>
+                <td>
+                  @if($item->status == 1)
+                      <span class="badge bg-success">successful</span>
+                  @elseif ($item->status == 2)
+                      <span class="badge bg-warning">pending</span>
+                  @elseif ($item->status == 3)
+                      <span class="badge bg-danger">failed</span>
+                  @endif
+                </td>
+                <td>
+                  <p class="my-0">Code: {{$item->code}}</p>
+                  <p class="my-0">Name: {{$item->name}} </p>
+                  <p class="badge bg-info my-0"> {{$item->type}} </p>
+                  <p class="my-0">Meter: {{$item->meter}}</p>
+                </td>
+                {{-- <td><span class="badge bg-info"> {{$item->type}} </span></td>
+                <td>{{$item->meter}}</td> --}}
+                <td>{{show_datetime($item->updated_at)}}</td>
+                <td>{{$item->token}}</td>
+              </tr>
+            @endforeach
+          </tbody>
       </table>
     </div>
   </div>

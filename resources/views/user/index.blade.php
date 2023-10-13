@@ -170,7 +170,7 @@
               <td>{{$item->name}}</td>
               <td>{{$item->meter}}</td>
               <td>{{show_datetime($item->updated_at)}}</td>
-              <td>{{$item->message}}</td>
+              <td>{{$item->token}}</td>
             </tr>
           @endforeach
         </tbody>

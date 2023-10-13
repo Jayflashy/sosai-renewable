@@ -5,7 +5,7 @@
 <div class="card">
   <div class="card-header d-sm-flex justify-content-between">
     <h4>Make Meter Payments</h4>
-    <a href="{{route('app.agent.transactions')}}" class="btn btn-success ">View Transactions</a>
+    <a href="{{route('agent.transactions')}}" class="btn btn-success ">View Transactions</a>
   </div>
   <div class="card-body">
     {{-- Select meter type --}}
@@ -89,7 +89,7 @@
             </div>
             <div class="form-group">
                 <label class="form-label fw-bold">Amount</label>
-                <input type="number" max="{{Auth::user()->balance}}" class="form-control" min="0" name="amount" step="any" required placeholder="Amount">
+                <input type="number" class="form-control" min="0" name="amount" step="any" required placeholder="Amount">
             </div>
             <div class="form-group col-4">
                 <button type="button" id="validateSteama" class="btn btn-primary w-100 mb-2 btn-sm"><span>Validate Meter</span></button>

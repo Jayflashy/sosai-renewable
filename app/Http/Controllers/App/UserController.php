@@ -220,7 +220,7 @@ class UserController extends Controller
                 // send sms and email
                 $actUrl =  $response['_links']['za:activation']['href'];
                 $token =  angaza_token_from_link($actUrl);
-                $mesg = "Thank you! We have received your payment of ".format_number($request->amount)." for account {$request->meter}. . Keycode: {$token}.";
+                $mesg = "Thank you! We have received your payment of ".format_number($request->amount)." for Meter {$request->meter}. . Keycode: {$token}.";
                 send_sms($response['msisdn'],$mesg);
                 return redirect()->route('user.transactions')->withSuccess($trx->message ."was successful");
             }

@@ -15,7 +15,7 @@
             <th>Name</th>
             <th>Meter</th>
             <th>Date</th>
-            <th>Details</th>
+            <th>Keycode</th>
           </tr>
         </thead>
         <tbody>
@@ -30,13 +30,13 @@
                     <span class="badge bg-warning">pending</span>
                 @elseif ($item->status == 3)
                     <span class="badge bg-danger">failed</span>
-                @endif        
+                @endif
               </td>
               <td>{{$item->code}}</td>
               <td>{{$item->name}}</td>
               <td>{{$item->meter}}</td>
               <td>{{show_datetime($item->updated_at)}}</td>
-              <td>{{$item->message}}</td>
+              <td>{{$item->token}}</td>
             </tr>
           @endforeach
         </tbody>

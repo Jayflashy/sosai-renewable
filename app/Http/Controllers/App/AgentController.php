@@ -86,8 +86,6 @@ class AgentController extends Controller
         return back()->withSuccess('User Profile Updated Successfully');
     }
     function package_payment(){
-        $mesg = "Thank you! We have received your payment of ".format_number(1000)." for account 1234567890 . Keycode: .";
-        return send_sms("2348035852702",$mesg);
         return view('app.agent.pay');
     }
     // meter verificaion
@@ -255,7 +253,7 @@ class AgentController extends Controller
                 $trx->token = $token ?? "";
                 $trx->save();
                 // send sms and email
-                $mesg = "Thank you! We have received your payment of ".format_number($request->amount)." for account {$request->meter}. . Keycode: {$token}.";
+                $mesg = "Thank you! We have received your payment of ".format_number($request->amount)." for Meter {$request->meter}. . Keycode: {$token}.";
                 send_sms($response['msisdn'],$mesg);
                 return redirect()->route('app.agent.transactions')->withSuccess($trx->message ."was successful");
             }
@@ -331,6 +329,8 @@ class AgentController extends Controller
         $user = $deposit->user;
         $user->balance += $deposit->amount;
         $user->save();
+        // Fund Angaza Wallet
+
         return redirect()->route('app.agent.index')->withSuccess('Payment was successful');
     }
     public function deposit_history(){
