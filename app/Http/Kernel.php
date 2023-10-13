@@ -63,9 +63,10 @@ class Kernel extends HttpKernel
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,        
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'user' => \App\Http\Middleware\User::class,
         'meter' => \App\Http\Middleware\Meter::class,
         'agent' => \App\Http\Middleware\Agent::class,
+        'device' => \App\Http\Middleware\DeviceDetection::class,
     ];
 }

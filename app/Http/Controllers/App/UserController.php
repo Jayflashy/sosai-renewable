@@ -243,10 +243,13 @@ class UserController extends Controller
         return back()->with('error', 'Invalid Request. Please try again')->withInput();
     }
     // transactions
-    public function transactions(){
+    public function transactions(Request $request){
+
         $transactions = Transaction::whereUserId(Auth::user()->id)->orderByDesc('updated_at')->get();
         return view('app.user.transactions', \compact('transactions'));
     }
+
+
     public function wallet(){
 
         $deposits = Deposit::whereUserId(Auth::user()->id)->orderByDesc('id')->get();

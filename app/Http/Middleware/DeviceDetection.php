@@ -16,6 +16,23 @@ class DeviceDetection
      */
     public function handle(Request $request, Closure $next)
     {
+        $deviceType = $this->getDeviceType($request);
+
+        if ($deviceType === 'mobile') {
+            return redirect($request->root().'/app/'.$request->path());
+        }
+
         return $next($request);
+    }
+
+    private function getDeviceType(Request $request)
+    {
+        $userAgent = $request->userAgent();
+
+        if (preg_match('/(iPhone|iPod|Android|BlackBerry|Opera Mini|IEMobile)/i', $userAgent)) {
+            return 'mobile';
+        }
+
+        return 'web';
     }
 }

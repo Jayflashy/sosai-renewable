@@ -20,7 +20,7 @@ class UserController extends Controller
         $transactions = Transaction::whereUserId(Auth::user()->id)->orderByDesc('updated_at')->limit(10)->get();
         return view('user.index', compact('transactions'));
     }
-    public function profile(){
+    public function profile(Request $request){
         return view('user.profile');
     }
     function update_password(Request $request){

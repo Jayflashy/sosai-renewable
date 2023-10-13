@@ -26,7 +26,7 @@ Route::controller(HomeController::class)->group(function(){
     Route::post('/register', 'register')->name('register');
 });
 
-Route::middleware('user')->prefix('user')->as('user.')->controller(UserController::class)->group(function(){
+Route::middleware('user','device')->prefix('user')->as('user.')->controller(UserController::class)->group(function(){
     Route::get('/', 'index')->name('index');
     Route::get('/dashboard', 'index')->name('dashboard');
     Route::get('/profile', 'profile')->name('profile');
@@ -41,7 +41,7 @@ Route::middleware('user')->prefix('user')->as('user.')->controller(UserControlle
     Route::get('/bank-generate', 'bank');
 });
 
-Route::middleware('agent')->prefix('agent')->as('agent.')->controller(AgentController::class)->group(function(){
+Route::middleware('agent','device')->prefix('agent')->as('agent.')->controller(AgentController::class)->group(function(){
     Route::get('/', 'index')->name('index');
     Route::get('/dashboard', 'index')->name('dashboard');
     Route::get('/profile', 'profile')->name('profile');
