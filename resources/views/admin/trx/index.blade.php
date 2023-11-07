@@ -11,7 +11,7 @@
                 <p>Manage system Ads.</p>
             </div>
         </div><!-- .nk-block-head-content -->
-        
+
     </div><!-- .nk-block-between -->
 </div><!-- .nk-block-head -->
 @endsection
@@ -26,11 +26,8 @@
           <th>User</th>
           <th>Amount</th>
           <th>Status</th>
-          <th>Trx Code</th>
-          <th>Name</th>
-          <th>Phone Number</th>
-          <th>Meter Type</th>
-          <th>Meter No</th>
+          <th>Details</th>
+          <th>Token</th>
           <th>Date</th>
           <th>Response</th>
         </tr>
@@ -48,18 +45,20 @@
                   <span class="badge bg-warning">pending</span>
               @elseif ($item->status == 3)
                   <span class="badge bg-danger">failed</span>
-              @endif        
+              @endif
             </td>
-            <td>{{$item->code}}</td>
-            <td>{{$item->name}}</td>
-            <td>{{$item->phone}}</td>
-            <td><span class="badge bg-info"> {{$item->type}} </span></td>
-            <td>{{$item->meter}}</td>
+            <td>
+                <p class="my-0">Name: {{$item->name}} </p>
+                <p class="my-0">CODE: {{$item->code}} </p>
+                <p class="badge bg-info my-0"> {{$item->type}} </p>
+                <p class="my-0">Meter Number: {{$item->meter}}</p>
+            </td>
+            <td>{{$item->token}}</td>
             <td>{{show_datetime($item->updated_at)}}</td>
             <td>
               <a class="btn btn-primary btn-sm btn-circle"  data-bs-toggle="modal" data-bs-target="#TrxResponse{{$item->id}}" title="@lang('Response') ">
                 View
-              </a> 
+              </a>
             </td>
           </tr>
           <div class="modal fade" id="TrxResponse{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
